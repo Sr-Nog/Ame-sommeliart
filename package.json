@@ -1,0 +1,10 @@
+{
+  "name": "sommeliart-site",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "dependencies": {
+    "@vercel/kv": "^1.0.1",
+    "pdf-lib": "^1.17.1"
+  }
+}
