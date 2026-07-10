@@ -191,26 +191,25 @@
     <div class="details-grid">
       <div class="detail-card">
         <span class="detail-label">Data e horário</span>
-        <strong class="detail-value detail-value--pending">Em breve</strong>
-        <p>A data será anunciada em nossas redes sociais assim que confirmada.</p>
+        <strong class="detail-value">31 de julho de 2026 — 19h30</strong>
+        <p>Chegue com antecedência para aproveitar cada momento da noite.</p>
       </div>
       <div class="detail-card">
         <span class="detail-label">Local</span>
-        <strong class="detail-value detail-value--pending">A confirmar — Caldas Novas, GO</strong>
-        <p>O endereço completo será divulgado em breve.</p>
+        <strong class="detail-value">Caldas Novas, GO</strong>
+        <p>Rua Presidente José Noronha, S/N — Quadra 63, Lote 07 — St. Lagoa Quente, Caldas Novas - GO, 75692-586</p>
       </div>
       <div class="detail-card">
         <span class="detail-label">Investimento</span>
-        <strong class="detail-value detail-value--pending">Em breve</strong>
-        <p>Valores e o que está incluso no ingresso serão anunciados em breve.</p>
+        <strong class="detail-value">R$ 249,00</strong>
+        <p>Inclui degustação guiada, harmonização, ambientação premium e uma lembrança especial da noite.</p>
       </div>
     </div>
 
-    <!-- TODO: assim que o endereço do evento for definido, substituir o iframe abaixo pelo embed real do Google Maps -->
     <div class="map-embed">
       <iframe
-        title="Localização do evento — Caldas Novas, GO"
-        src="https://www.google.com/maps?q=Caldas+Novas,+GO&output=embed"
+        title="Localização do evento — Rua Presidente José Noronha, Caldas Novas, GO"
+        src="https://www.google.com/maps?q=Rua+Presidente+Jos%C3%A9+Noronha,+Quadra+63,+Lote+07,+St.+Lagoa+Quente,+Caldas+Novas+-+GO,+75692-586&output=embed"
         loading="lazy"
         referrerpolicy="no-referrer-when-downgrade">
       </iframe>
@@ -230,20 +229,34 @@
       <div class="ticket-card__top">
         <span class="ticket-badge">Vagas limitadas</span>
         <h3>Ingresso Experiência SOMMELIART</h3>
-        <p class="ticket-price"><span class="ticket-price__pending">Valor em breve</span></p>
+        <p class="ticket-price">R$ 249,00</p>
         <p class="ticket-desc">
           Inclui degustação guiada, harmonização, ambientação premium e uma lembrança
           especial da noite.
         </p>
       </div>
 
-      <button type="button" class="btn btn--primary btn--full" id="btnComprarIngresso">
-        Comprar meu ingresso
-      </button>
-      <p class="ticket-note">
-        Pagamento processado com segurança via InfinitePay.
-      </p>
-      <!-- TODO: integrar checkout real da InfinitePay assim que as credenciais forem enviadas pelo cliente -->
+      <form class="checkout-form" id="checkoutForm" novalidate>
+        <div class="form-row">
+          <label for="checkoutNome">Nome completo</label>
+          <input type="text" id="checkoutNome" name="nome" placeholder="Seu nome" required>
+        </div>
+        <div class="form-row">
+          <label for="checkoutEmail">E-mail</label>
+          <input type="email" id="checkoutEmail" name="email" placeholder="seu@email.com" required>
+        </div>
+        <div class="form-row">
+          <label for="checkoutWhatsapp">WhatsApp</label>
+          <input type="tel" id="checkoutWhatsapp" name="whatsapp" placeholder="(64) 90000-0000" required>
+        </div>
+
+        <button type="submit" class="btn btn--primary btn--full" id="btnComprarIngresso">
+          Comprar meu ingresso
+        </button>
+        <p class="ticket-note" id="checkoutNote">
+          Pagamento processado com segurança via InfinitePay.
+        </p>
+      </form>
     </div>
   </div>
 </section>
@@ -337,8 +350,10 @@
           <span class="accordion-icon">+</span>
         </button>
         <div class="accordion-panel">
-          <p>O pagamento é feito de forma segura através da InfinitePay. Após a compra,
-          preencha o formulário de reserva nesta página para confirmar sua vaga pelo WhatsApp.</p>
+          <p>Ao clicar em "Comprar meu ingresso", você preenche seus dados e é redirecionada
+          para o pagamento seguro via InfinitePay. Assim que o pagamento for aprovado, seu
+          ingresso em PDF fica disponível para download na hora, e você também pode confirmar
+          pelo WhatsApp.</p>
         </div>
       </div>
       <div class="accordion-item">
@@ -347,8 +362,8 @@
           <span class="accordion-icon">+</span>
         </button>
         <div class="accordion-panel">
-          <p>O valor e o que está incluso serão anunciados em breve em nossas redes sociais e
-          diretamente aqui no site.</p>
+          <p>O ingresso custa R$ 249,00 e inclui degustação guiada, harmonização, ambientação
+          premium e uma lembrança especial da noite.</p>
         </div>
       </div>
       <div class="accordion-item">
@@ -357,8 +372,8 @@
           <span class="accordion-icon">+</span>
         </button>
         <div class="accordion-panel">
-          <p>O SOMMELIART acontece em Caldas Novas, GO. Data e endereço completo serão
-          divulgados em breve — fique de olho na seção "Detalhes do evento".</p>
+          <p>O SOMMELIART acontece em 31 de julho de 2026, às 19h30, na Rua Presidente José
+          Noronha, S/N — Quadra 63, Lote 07 — St. Lagoa Quente, Caldas Novas - GO, 75692-586.</p>
         </div>
       </div>
       <div class="accordion-item">

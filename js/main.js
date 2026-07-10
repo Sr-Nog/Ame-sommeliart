@@ -2,11 +2,9 @@
   'use strict';
 
   /* ============================================================
-     CONFIG — valores em standby, definidos pelo cliente
+     CONFIG
      ============================================================ */
   var CONFIG = {
-    // TODO: confirmar com a cliente o número oficial de WhatsApp do evento
-    // (valor atual copiado do briefing como número de contato provisório)
     whatsappNumber: '5564992248116',
     eventName: 'SOMMELIART'
   };
@@ -102,19 +100,48 @@
   });
 
   /* ============================================================
-     Ticket purchase button — InfinitePay placeholder
-     TODO: substituir por integração real assim que a cliente
-     enviar as credenciais/checkout da InfinitePay
+     Ticket purchase — cria o link de checkout via /api/create-checkout
+     e redireciona para o pagamento na InfinitePay
      ============================================================ */
+  var checkoutForm = document.getElementById('checkoutForm');
+  var checkoutNote = document.getElementById('checkoutNote');
   var btnComprar = document.getElementById('btnComprarIngresso');
-  if (btnComprar) {
-    btnComprar.addEventListener('click', function () {
-      alert(
-        'O checkout de pagamento via InfinitePay será habilitado em breve.\n\n' +
-        'Enquanto isso, preencha o formulário de reserva logo abaixo para ' +
-        'garantir seu atendimento prioritário.'
-      );
-      document.getElementById('reserva').scrollIntoView({ behavior: 'smooth' });
+
+  if (checkoutForm) {
+    checkoutForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      var nome = checkoutForm.nome.value.trim();
+      var email = checkoutForm.email.value.trim();
+      var whatsapp = checkoutForm.whatsapp.value.trim();
+
+      if (!nome || !email || !whatsapp) {
+        checkoutNote.textContent = 'Preencha nome, e-mail e WhatsApp para continuar.';
+        return;
+      }
+
+      btnComprar.disabled = true;
+      checkoutNote.textContent = 'Preparando seu pagamento seguro...';
+
+      fetch('/api/create-checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ nome: nome, email: email, whatsapp: whatsapp })
+      })
+        .then(function (res) {
+          if (!res.ok) { throw new Error('checkout_failed'); }
+          return res.json();
+        })
+        .then(function (data) {
+          if (!data.url) { throw new Error('checkout_failed'); }
+          checkoutNote.textContent = 'Tudo certo! Redirecionando você para o pagamento...';
+          window.location.href = data.url;
+        })
+        .catch(function () {
+          btnComprar.disabled = false;
+          checkoutNote.textContent =
+            'Não foi possível iniciar o pagamento agora. Tente novamente em instantes ou fale conosco pelo WhatsApp.';
+        });
     });
   }
 
