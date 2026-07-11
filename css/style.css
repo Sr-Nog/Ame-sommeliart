@@ -177,6 +177,8 @@ a { color: inherit; text-decoration: none; }
   border: none;
   cursor: pointer;
   padding: 6px;
+  position: relative;
+  z-index: 10;
 }
 .nav-toggle span {
   height: 2px;
@@ -190,13 +192,12 @@ a { color: inherit; text-decoration: none; }
    ========================================================================== */
 .hero-scroll {
   position: relative;
-  height: 280vh;
 }
 
 .hero {
-  position: sticky;
-  top: 0;
+  position: relative;
   height: 100vh;
+  min-height: 640px;
   display: flex;
   align-items: center;
   overflow: hidden;
@@ -213,6 +214,7 @@ a { color: inherit; text-decoration: none; }
   height: 100%;
   object-fit: cover;
 }
+.hero-media img.hero-photo--mobile { display: none; }
 .hero-overlay {
   position: absolute;
   inset: 0;
@@ -227,11 +229,10 @@ a { color: inherit; text-decoration: none; }
   padding-top: 120px;
 }
 
-.hero-title {
-  font-size: clamp(2.6rem, 7vw, 5rem);
-  color: var(--white);
-  letter-spacing: 0.05em;
-  margin-bottom: 0.1em;
+.hero-logo-full-wrap { margin: 0 0 22px; }
+.hero-logo-full {
+  width: min(340px, 60vw);
+  filter: drop-shadow(0 6px 18px rgba(0,0,0,0.35));
 }
 
 .hero-tagline {
@@ -252,6 +253,29 @@ a { color: inherit; text-decoration: none; }
   gap: 18px;
   flex-wrap: wrap;
   margin-top: 1.5em;
+}
+
+.hero-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 1.6em;
+  padding: 0;
+  list-style: none;
+}
+.hero-meta li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--white);
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.35);
+  padding: 10px 18px;
+  border-radius: 30px;
+  backdrop-filter: blur(4px);
 }
 
 .scroll-cue {
@@ -322,9 +346,8 @@ a { color: inherit; text-decoration: none; }
   gap: 10px 14px;
 }
 .tag-list li {
-  font-size: 0.8rem;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.02em;
   border: 1px solid var(--gold);
   color: var(--wine);
   background: transparent;
@@ -417,6 +440,111 @@ a { color: inherit; text-decoration: none; }
 .feature-card:hover .feature-icon--white { opacity: 1; }
 
 .feature-card p { color: #5a4045; font-size: 0.95rem; transition: color var(--transition); }
+
+/* ==========================================================================
+   Experiência — Carousel (adaptado do React Bits, em JS/CSS puro)
+   ========================================================================== */
+.exp-carousel {
+  position: relative;
+  padding: 8px 0 0;
+}
+.exp-carousel-viewport {
+  overflow: hidden;
+  perspective: 1400px;
+  padding: 12px 0 36px;
+}
+.exp-carousel-track {
+  display: flex;
+  gap: 28px;
+  cursor: grab;
+  user-select: none;
+  touch-action: pan-y;
+  will-change: transform;
+  transition: transform 0.5s cubic-bezier(.4,0,.2,1);
+}
+.exp-carousel-track.is-dragging { cursor: grabbing; transition: none; }
+
+.exp-carousel-track .feature-card {
+  flex: 0 0 auto;
+  width: min(300px, 78vw);
+  transition: transform 0.5s cubic-bezier(.4,0,.2,1), opacity 0.5s ease, border-color var(--transition), box-shadow var(--transition);
+  transform: rotateY(calc(var(--offset, 0) * -14deg)) scale(calc(1 - min(var(--abs-offset, 0), 3) * 0.07));
+  opacity: calc(1 - min(var(--abs-offset, 0), 3) * 0.28);
+}
+.exp-carousel-track .feature-card:hover { transform: rotateY(calc(var(--offset, 0) * -14deg)) scale(calc(1 - min(var(--abs-offset, 0), 3) * 0.07)); }
+.exp-carousel-track .feature-card.is-active {
+  border-color: var(--gold);
+  box-shadow: 0 24px 48px rgba(43, 15, 20, 0.18);
+}
+
+.exp-carousel-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 26px;
+  margin-top: 8px;
+}
+.exp-carousel-arrow {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid var(--gold);
+  background: transparent;
+  color: var(--wine);
+  font-size: 1.1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--transition), color var(--transition), transform var(--transition);
+}
+.exp-carousel-arrow:hover { background: var(--wine); color: var(--white); transform: translateY(-2px); }
+
+.exp-carousel-indicators {
+  display: flex;
+  gap: 10px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.exp-carousel-indicator {
+  width: 9px;
+  height: 9px;
+  padding: 0;
+  border-radius: 50%;
+  border: 1px solid var(--gold);
+  background: transparent;
+  cursor: pointer;
+  transition: background var(--transition), transform var(--transition);
+}
+.exp-carousel-indicator.is-active {
+  background: var(--wine);
+  border-color: var(--wine);
+  transform: scale(1.3);
+}
+
+/* ==========================================================================
+   Fade carousel (fotos autorais — Sobre / Depoimentos)
+   ========================================================================== */
+.fade-carousel {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--wine-dark);
+}
+.fade-carousel img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 1.4s ease;
+}
+.fade-carousel img.is-active { opacity: 1; }
+.fade-carousel--wide { aspect-ratio: 16 / 10; }
 
 /* ==========================================================================
    Details / tickets
@@ -591,6 +719,10 @@ a { color: inherit; text-decoration: none; }
 /* ==========================================================================
    Testimonials
    ========================================================================== */
+.testimonial-photos {
+  max-width: 620px;
+  margin: 0 auto 48px;
+}
 .testimonial-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -656,34 +788,56 @@ a { color: inherit; text-decoration: none; }
 }
 
 /* ==========================================================================
-   Contact
+   Realização e Hub&Co
    ========================================================================== */
-.contact-grid {
+.hub-section {
+  background: #2a0f14;
+  color: var(--white);
+  padding: 72px 0 56px;
+  text-align: center;
+}
+.hub-eyebrow {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--gold);
+  margin-bottom: 28px;
+}
+.hub-realizacao {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+.hub-card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 18px;
+  padding: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform var(--transition), background var(--transition);
+}
+.hub-card:hover { transform: translateY(-4px); background: rgba(255,255,255,0.09); }
+.hub-card img { max-height: 70px; width: auto; max-width: 160px; }
+.hub-card--main { width: 190px; height: 170px; }
+
+.hub-divider {
+  width: 60px;
+  height: 1px;
+  background: rgba(255,255,255,0.25);
+  margin: 0 auto 28px;
+}
+
+.hub-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 20px;
+  max-width: 880px;
+  margin: 0 auto;
 }
-.contact-item {
-  display: block;
-  padding: 26px 20px;
-  border: 1px solid rgba(255,255,255,0.25);
-  border-radius: var(--radius);
-  text-align: center;
-  transition: background var(--transition), transform var(--transition);
-}
-.contact-item:hover {
-  background: rgba(255,255,255,0.08);
-  transform: translateY(-3px);
-}
-.contact-label {
-  display: block;
-  font-size: 0.72rem;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--pink);
-  margin-bottom: 8px;
-}
-.contact-value { font-family: var(--font-display); font-size: 1rem; }
+.hub-grid .hub-card { padding: 28px 18px; height: 130px; }
+.hub-grid .hub-card img { max-height: 54px; filter: brightness(0) invert(1); opacity: 0.92; }
 
 /* ==========================================================================
    Footer
@@ -737,8 +891,10 @@ a { color: inherit; text-decoration: none; }
   .split { grid-template-columns: 1fr; gap: 40px; }
   .feature-grid { grid-template-columns: repeat(2, 1fr); }
   .details-grid { grid-template-columns: 1fr; }
-  .testimonial-grid { grid-template-columns: 1fr; }
-  .contact-grid { grid-template-columns: repeat(2, 1fr); }
+  .testimonial-grid { grid-template-columns: repeat(2, 1fr); }
+  .hub-grid { grid-template-columns: repeat(2, 1fr); }
+  .hero-media img.hero-photo--desktop { display: none; }
+  .hero-media img.hero-photo--mobile { display: block; }
 }
 
 @media (max-width: 760px) {
@@ -763,10 +919,13 @@ a { color: inherit; text-decoration: none; }
   .header-actions .btn--ghost-nav { display: none; }
   .section { padding: 72px 0; }
   .feature-grid { grid-template-columns: 1fr; }
-  .contact-grid { grid-template-columns: 1fr; }
+  .testimonial-grid { grid-template-columns: 1fr; }
+  .hub-grid { grid-template-columns: repeat(2, 1fr); }
   .ticket-card { padding: 32px 24px; }
   .brand-logo { height: 40px !important; }
-  .hero-scroll { height: 220vh; }
+  .hero-meta { gap: 8px; }
+  .hero-meta li { font-size: 0.7rem; padding: 8px 14px; }
+  .exp-carousel-track .feature-card { width: min(260px, 82vw); }
   .whatsapp-float {
     width: 52px;
     height: 52px;

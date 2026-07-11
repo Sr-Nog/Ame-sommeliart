@@ -13,7 +13,14 @@ export default async function handler(req, res) {
     return;
   }
 
-  const order = await kv.get(`order:${orderNsu}`);
+  let order;
+  try {
+    order = await kv.get(`order:${orderNsu}`);
+  } catch (err) {
+    res.status(500).json({ error: 'storage_unavailable' });
+    return;
+  }
+
   if (!order) {
     res.status(404).json({ error: 'not_found' });
     return;

@@ -20,17 +20,22 @@ export default async function handler(req, res) {
   const baseUrl = getBaseUrl(req);
   const webhookSecret = process.env.INFINITEPAY_WEBHOOK_SECRET;
 
-  await kv.set(
-    `order:${orderNsu}`,
-    {
-      nome,
-      email,
-      whatsapp,
-      status: 'pending',
-      createdAt: Date.now()
-    },
-    { ex: ORDER_TTL_SECONDS }
-  );
+  try {
+    await kv.set(
+      `order:${orderNsu}`,
+      {
+        nome,
+        email,
+        whatsapp,
+        status: 'pending',
+        createdAt: Date.now()
+      },
+      { ex: ORDER_TTL_SECONDS }
+    );
+  } catch (err) {
+    res.status(500).json({ error: 'storage_unavailable' });
+    return;
+  }
 
   let infinitePayRes;
   try {

@@ -29,7 +29,6 @@
       <a href="#detalhes">Detalhes</a>
       <a href="#depoimentos">Depoimentos</a>
       <a href="#faq">FAQ</a>
-      <a href="#contato">Contato</a>
     </nav>
 
     <div class="header-actions">
@@ -41,24 +40,27 @@
   </div>
 </header>
 
-<!-- ===================== HERO (scroll-trigger) ===================== -->
+<!-- ===================== HERO ===================== -->
 <section class="hero-scroll" id="topo">
   <div class="hero" id="heroPin">
     <div class="hero-media" id="heroMedia">
-      <video class="hero-video" id="heroVideo" muted playsinline preload="auto" poster="assets/img/sommeliart-taca-vazia.png">
-        <source src="assets/video/sommeliart-servindo-vinho.mp4" type="video/mp4">
-      </video>
+      <img class="hero-photo--desktop" src="assets/img/fotos/foto-69.jpg" alt="Convidadas brindando durante o SOMMELIART">
+      <img class="hero-photo--mobile" src="assets/img/fotos/foto-259.jpg" alt="Convidadas brindando durante o SOMMELIART">
       <div class="hero-overlay"></div>
     </div>
 
     <div class="container hero-content">
-      <p class="eyebrow eyebrow--script">um convite Âme&amp;Co</p>
-      <h1 class="hero-title">SOMMELIART</h1>
+      <h1 class="hero-logo-full-wrap"><img src="assets/logo/4.png" alt="SOMMELIART por Âme&amp;Co" class="hero-logo-full"></h1>
       <p class="hero-tagline">brindamos o que somos</p>
       <p class="hero-desc">
         Uma experiência sensorial de degustação de vinhos, pensada para mulheres que celebram
         a vida com elegância. Uma noite de aromas, histórias e taças em boa companhia.
       </p>
+      <ul class="hero-meta">
+        <li>31 de julho de 2026</li>
+        <li>19h30</li>
+        <li>Arena Music Hall — Caldas Novas, GO</li>
+      </ul>
       <div class="hero-actions">
         <a href="#ingressos" class="btn btn--primary">Garantir meu ingresso</a>
         <a href="#experiencia" class="btn btn--outline-light">Conhecer a experiência</a>
@@ -75,7 +77,23 @@
 <section class="section section--cream" id="sobre">
   <div class="container split">
     <div class="split-media">
-      <img src="assets/img/sommeliart-taca-vazia.png" alt="Garrafa de vinho SOMMELIART ao lado de uma taça" loading="lazy">
+      <div class="fade-carousel" id="sobreCarousel" data-autoplay-delay="5000">
+        <img src="assets/img/fotos/foto-74.jpg" alt="Momento autoral do SOMMELIART" class="is-active">
+        <img src="assets/img/fotos/foto-91.jpg" alt="Momento autoral do SOMMELIART">
+        <img src="assets/img/fotos/foto-141.jpg" alt="Momento autoral do SOMMELIART">
+        <img src="assets/img/fotos/foto-163.jpg" alt="Momento autoral do SOMMELIART">
+        <img src="assets/img/fotos/foto-169.jpg" alt="Momento autoral do SOMMELIART">
+        <img src="assets/img/fotos/foto-195.jpg" alt="Momento autoral do SOMMELIART">
+        <img src="assets/img/fotos/foto-226.jpg" alt="Momento autoral do SOMMELIART">
+        <img src="assets/img/fotos/foto-227.jpg" alt="Momento autoral do SOMMELIART">
+        <img src="assets/img/fotos/foto-235.jpg" alt="Momento autoral do SOMMELIART">
+        <img src="assets/img/fotos/foto-236.jpg" alt="Momento autoral do SOMMELIART">
+        <img src="assets/img/fotos/foto-243.jpg" alt="Momento autoral do SOMMELIART">
+        <img src="assets/img/fotos/foto-305.jpg" alt="Momento autoral do SOMMELIART">
+        <img src="assets/img/fotos/foto-309.jpg" alt="Momento autoral do SOMMELIART">
+        <img src="assets/img/fotos/foto-313.jpg" alt="Momento autoral do SOMMELIART">
+        <img src="assets/img/fotos/foto-379.jpg" alt="Momento autoral do SOMMELIART">
+      </div>
       <img src="assets/logo/7.png" alt="" class="seal-float" aria-hidden="true">
     </div>
     <div class="split-text">
@@ -92,10 +110,9 @@
         presença.
       </p>
       <ul class="tag-list">
-        <li>Curadoria de vinhos</li>
-        <li>Ambiente premium</li>
-        <li>Experiência guiada</li>
-        <li>Rodada de harmonização</li>
+        <li>Degustação de Vinhos</li>
+        <li>Arte &amp; Criatividade</li>
+        <li>Curadoria Âme&amp;Co</li>
       </ul>
     </div>
   </div>
@@ -109,73 +126,82 @@
       <h2>O que você vai viver no SOMMELIART</h2>
     </div>
 
-    <div class="feature-grid">
-      <article class="feature-card" style="--card-photo: url('assets/img/eventos/evento-01.jpg')">
-        <div class="feature-card__photo"></div>
-        <div class="feature-card__front">
-          <span class="feature-icon-wrap">
-            <img src="assets/icons/vinho.png" alt="" class="feature-icon feature-icon--color">
-            <img src="assets/icons/vinho-branco.png" alt="" class="feature-icon feature-icon--white">
-          </span>
-          <h3>Degustação guiada</h3>
-          <p>Uma seleção de rótulos apresentada passo a passo, com histórias por trás de cada taça.</p>
+    <div class="exp-carousel" id="expCarousel" data-autoplay-delay="3500">
+      <div class="exp-carousel-viewport">
+        <div class="exp-carousel-track" id="expCarouselTrack">
+          <article class="feature-card" style="--card-photo: url('assets/img/eventos/evento-01.jpg')">
+            <div class="feature-card__photo"></div>
+            <div class="feature-card__front">
+              <span class="feature-icon-wrap">
+                <img src="assets/icons/vinho.png" alt="" class="feature-icon feature-icon--color">
+                <img src="assets/icons/vinho-branco.png" alt="" class="feature-icon feature-icon--white">
+              </span>
+              <h3>Degustação guiada</h3>
+              <p>Uma seleção de rótulos apresentada passo a passo, com histórias por trás de cada taça.</p>
+            </div>
+          </article>
+          <article class="feature-card" style="--card-photo: url('assets/img/eventos/evento-02.jpg')">
+            <div class="feature-card__photo"></div>
+            <div class="feature-card__front">
+              <span class="feature-icon-wrap">
+                <img src="assets/icons/louca.png" alt="" class="feature-icon feature-icon--color">
+                <img src="assets/icons/louca-branco.png" alt="" class="feature-icon feature-icon--white">
+              </span>
+              <h3>Harmonização</h3>
+              <p>Petiscos e sabores pensados para valorizar cada vinho servido durante a noite.</p>
+            </div>
+          </article>
+          <article class="feature-card" style="--card-photo: url('assets/img/eventos/evento-03.jpg')">
+            <div class="feature-card__photo"></div>
+            <div class="feature-card__front">
+              <span class="feature-icon-wrap">
+                <img src="assets/icons/cheers.png" alt="" class="feature-icon feature-icon--color">
+                <img src="assets/icons/cheers-branco.png" alt="" class="feature-icon feature-icon--white">
+              </span>
+              <h3>Boas companhias</h3>
+              <p>Um ambiente intimista para brindar, trocar histórias e criar novas conexões.</p>
+            </div>
+          </article>
+          <article class="feature-card" style="--card-photo: url('assets/img/eventos/evento-04.jpg')">
+            <div class="feature-card__photo"></div>
+            <div class="feature-card__front">
+              <span class="feature-icon-wrap">
+                <img src="assets/icons/disco.png" alt="" class="feature-icon feature-icon--color">
+                <img src="assets/icons/disco-branco.png" alt="" class="feature-icon feature-icon--white">
+              </span>
+              <h3>Ambientação premium</h3>
+              <p>Cenário, música e detalhes cuidadosamente escolhidos para uma noite memorável.</p>
+            </div>
+          </article>
+          <article class="feature-card" style="--card-photo: url('assets/img/eventos/evento-05.jpg')">
+            <div class="feature-card__photo"></div>
+            <div class="feature-card__front">
+              <span class="feature-icon-wrap">
+                <img src="assets/icons/drink.png" alt="" class="feature-icon feature-icon--color">
+                <img src="assets/icons/drink-branco.png" alt="" class="feature-icon feature-icon--white">
+              </span>
+              <h3>Momentos de conexão</h3>
+              <p>Vá sozinha, com uma amiga ou em grupo — o SOMMELIART recebe você de braços abertos.</p>
+            </div>
+          </article>
+          <article class="feature-card" style="--card-photo: url('assets/img/eventos/evento-06.jpg')">
+            <div class="feature-card__photo"></div>
+            <div class="feature-card__front">
+              <span class="feature-icon-wrap">
+                <img src="assets/icons/laco.png" alt="" class="feature-icon feature-icon--color">
+                <img src="assets/icons/laco-branco.png" alt="" class="feature-icon feature-icon--white">
+              </span>
+              <h3>Arte &amp; criatividade</h3>
+              <p>Exerça a sua criatividade através de uma experiência única e marcante de desconexão e arte manual.</p>
+            </div>
+          </article>
         </div>
-      </article>
-      <article class="feature-card" style="--card-photo: url('assets/img/eventos/evento-02.jpg')">
-        <div class="feature-card__photo"></div>
-        <div class="feature-card__front">
-          <span class="feature-icon-wrap">
-            <img src="assets/icons/louca.png" alt="" class="feature-icon feature-icon--color">
-            <img src="assets/icons/louca-branco.png" alt="" class="feature-icon feature-icon--white">
-          </span>
-          <h3>Harmonização</h3>
-          <p>Petiscos e sabores pensados para valorizar cada vinho servido durante a noite.</p>
-        </div>
-      </article>
-      <article class="feature-card" style="--card-photo: url('assets/img/eventos/evento-03.jpg')">
-        <div class="feature-card__photo"></div>
-        <div class="feature-card__front">
-          <span class="feature-icon-wrap">
-            <img src="assets/icons/cheers.png" alt="" class="feature-icon feature-icon--color">
-            <img src="assets/icons/cheers-branco.png" alt="" class="feature-icon feature-icon--white">
-          </span>
-          <h3>Boas companhias</h3>
-          <p>Um ambiente intimista para brindar, trocar histórias e criar novas conexões.</p>
-        </div>
-      </article>
-      <article class="feature-card" style="--card-photo: url('assets/img/eventos/evento-04.jpg')">
-        <div class="feature-card__photo"></div>
-        <div class="feature-card__front">
-          <span class="feature-icon-wrap">
-            <img src="assets/icons/disco.png" alt="" class="feature-icon feature-icon--color">
-            <img src="assets/icons/disco-branco.png" alt="" class="feature-icon feature-icon--white">
-          </span>
-          <h3>Ambientação premium</h3>
-          <p>Cenário, música e detalhes cuidadosamente escolhidos para uma noite memorável.</p>
-        </div>
-      </article>
-      <article class="feature-card" style="--card-photo: url('assets/img/eventos/evento-05.jpg')">
-        <div class="feature-card__photo"></div>
-        <div class="feature-card__front">
-          <span class="feature-icon-wrap">
-            <img src="assets/icons/drink.png" alt="" class="feature-icon feature-icon--color">
-            <img src="assets/icons/drink-branco.png" alt="" class="feature-icon feature-icon--white">
-          </span>
-          <h3>Momento a dois ou entre amigas</h3>
-          <p>Vá sozinha, com uma amiga ou em grupo — o SOMMELIART recebe você de braços abertos.</p>
-        </div>
-      </article>
-      <article class="feature-card" style="--card-photo: url('assets/img/eventos/evento-06.jpg')">
-        <div class="feature-card__photo"></div>
-        <div class="feature-card__front">
-          <span class="feature-icon-wrap">
-            <img src="assets/icons/vela.png" alt="" class="feature-icon feature-icon--color">
-            <img src="assets/icons/vela-branco.png" alt="" class="feature-icon feature-icon--white">
-          </span>
-          <h3>Lembrança da noite</h3>
-          <p>Um mimo especial para levar um pouco do SOMMELIART com você para casa.</p>
-        </div>
-      </article>
+      </div>
+      <div class="exp-carousel-nav">
+        <button type="button" class="exp-carousel-arrow" id="expPrev" aria-label="Item anterior">‹</button>
+        <ul class="exp-carousel-indicators" id="expIndicators"></ul>
+        <button type="button" class="exp-carousel-arrow" id="expNext" aria-label="Próximo item">›</button>
+      </div>
     </div>
   </div>
 </section>
@@ -196,13 +222,13 @@
       </div>
       <div class="detail-card">
         <span class="detail-label">Local</span>
-        <strong class="detail-value">Caldas Novas, GO</strong>
+        <strong class="detail-value">Arena Music Hall — Caldas Novas, GO</strong>
         <p>Rua Presidente José Noronha, S/N — Quadra 63, Lote 07 — St. Lagoa Quente, Caldas Novas - GO, 75692-586</p>
       </div>
       <div class="detail-card">
-        <span class="detail-label">Investimento</span>
+        <span class="detail-label">Investimento na experiência</span>
         <strong class="detail-value">R$ 249,00</strong>
-        <p>Inclui degustação guiada, harmonização, ambientação premium e uma lembrança especial da noite.</p>
+        <p>Inclui degustação de vinhos, ambientação premium e todos os materiais de arte necessários.</p>
       </div>
     </div>
 
@@ -231,8 +257,8 @@
         <h3>Ingresso Experiência SOMMELIART</h3>
         <p class="ticket-price">R$ 249,00</p>
         <p class="ticket-desc">
-          Inclui degustação guiada, harmonização, ambientação premium e uma lembrança
-          especial da noite.
+          Inclui degustação de vinhos, ambientação premium e todos os materiais de arte
+          necessários.
         </p>
       </div>
 
@@ -304,7 +330,7 @@
     </div>
 
     <div class="split-media">
-      <img src="assets/img/sommeliart-taca-meia.png" alt="Taça de vinho SOMMELIART servida pela metade" loading="lazy">
+      <img src="assets/img/fotos/foto-74.jpg" alt="Momento da experiência SOMMELIART" loading="lazy">
     </div>
   </div>
 </section>
@@ -317,19 +343,52 @@
       <h2>Depoimentos</h2>
     </div>
 
-    <!-- TODO: substituir pelos depoimentos reais de clientes assim que estiverem disponíveis -->
+    <div class="testimonial-photos">
+      <div class="fade-carousel fade-carousel--wide" id="depoimentosCarousel" data-autoplay-delay="5000">
+        <img src="assets/img/fotos/foto-194.jpg" alt="Convidadas do SOMMELIART" class="is-active">
+        <img src="assets/img/fotos/foto-217.jpg" alt="Convidadas do SOMMELIART">
+        <img src="assets/img/fotos/foto-282.jpg" alt="Convidadas do SOMMELIART">
+        <img src="assets/img/fotos/foto-335.jpg" alt="Convidadas do SOMMELIART">
+        <img src="assets/img/fotos/foto-337.jpg" alt="Convidadas do SOMMELIART">
+      </div>
+    </div>
+
     <div class="testimonial-grid">
       <blockquote class="testimonial-card">
-        <p>“Uma noite leve, elegante e cheia de descobertas. Já quero a próxima edição.”</p>
-        <cite>— Depoimento de cliente (em breve)</cite>
+        <p>"Achei muito legal, vocês estão de parabéns, muito bem organizado."</p>
+        <cite>— Convidada SOMMELIART</cite>
       </blockquote>
       <blockquote class="testimonial-card">
-        <p>“Fui sozinha e saí com novas amigas e vinhos favoritos. Experiência incrível.”</p>
-        <cite>— Depoimento de cliente (em breve)</cite>
+        <p>"Achei muito bom! Foi uma experiência muito boa. Eu amei a ioga, que pra mim foi o ponto forte do evento."</p>
+        <cite>— Convidada SOMMELIART</cite>
       </blockquote>
       <blockquote class="testimonial-card">
-        <p>“Cada detalhe foi pensado com muito carinho. Se sentir cuidada do início ao fim.”</p>
-        <cite>— Depoimento de cliente (em breve)</cite>
+        <p>"Oi Lu, eu amei o evento. Vocês arrasaram demais. Parabéns!!! Podem me convidar sempre."</p>
+        <cite>— Convidada SOMMELIART</cite>
+      </blockquote>
+      <blockquote class="testimonial-card">
+        <p>"Muuuito obrigada! Gosto demais de estar com vocês."</p>
+        <cite>— Convidada SOMMELIART</cite>
+      </blockquote>
+      <blockquote class="testimonial-card">
+        <p>"Vi as fotos, ficou tudo muito lindo. Bem cuidado, feito com muita excelência."</p>
+        <cite>— Convidada SOMMELIART</cite>
+      </blockquote>
+      <blockquote class="testimonial-card">
+        <p>"Mesmo tendo acesso a tantos spoilers, conseguiram me surpreender! Fico besta de como vocês conseguem ser tão top."</p>
+        <cite>— Convidada SOMMELIART</cite>
+      </blockquote>
+      <blockquote class="testimonial-card">
+        <p>"Estava tudo muito perfeito! Mais uma vez."</p>
+        <cite>— Convidada SOMMELIART</cite>
+      </blockquote>
+      <blockquote class="testimonial-card">
+        <p>"Parabéns!! Estava impecável. Queria ter tirado mais fotos."</p>
+        <cite>— Convidada SOMMELIART</cite>
+      </blockquote>
+      <blockquote class="testimonial-card">
+        <p>"O que eu acho mais legal dos eventos de vocês é que eu não pareço estar em Caldas, é tão moderno, ideias inovadoras, eu adoro."</p>
+        <cite>— Convidada SOMMELIART</cite>
       </blockquote>
     </div>
   </div>
@@ -362,8 +421,8 @@
           <span class="accordion-icon">+</span>
         </button>
         <div class="accordion-panel">
-          <p>O ingresso custa R$ 249,00 e inclui degustação guiada, harmonização, ambientação
-          premium e uma lembrança especial da noite.</p>
+          <p>O ingresso custa R$ 249,00 e inclui degustação de vinhos, ambientação premium e
+          todos os materiais de arte necessários.</p>
         </div>
       </div>
       <div class="accordion-item">
@@ -396,35 +455,46 @@
           quanto para quem já é apaixonada por vinhos.</p>
         </div>
       </div>
+      <div class="accordion-item">
+        <button class="accordion-trigger" type="button">
+          O local possui estacionamento?
+          <span class="accordion-icon">+</span>
+        </button>
+        <div class="accordion-panel">
+          <p>Sim, estamos preparadas para te receber com segurança em nosso estacionamento
+          privado e sem custo.</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ===================== CONTATO ===================== -->
-<section class="section section--wine" id="contato">
-  <div class="container contact-inner">
-    <div class="section-head section-head--light">
-      <p class="eyebrow eyebrow--light">fale com a gente</p>
-      <h2>Contato</h2>
+<!-- ===================== REALIZAÇÃO E HUB&CO ===================== -->
+<section class="hub-section" id="realizacao">
+  <div class="container">
+    <p class="hub-eyebrow">Realização</p>
+    <div class="hub-realizacao">
+      <div class="hub-card hub-card--main">
+        <img src="assets/logo/6.png" alt="Âme&amp;Co — hub de experiências">
+      </div>
     </div>
 
-    <div class="contact-grid">
-      <a class="contact-item" id="contactWhatsapp" href="#" target="_blank" rel="noopener">
-        <span class="contact-label">WhatsApp</span>
-        <span class="contact-value">Fale conosco</span>
-      </a>
-      <a class="contact-item" href="mailto:ame.co.contato@gmail.com">
-        <span class="contact-label">E-mail</span>
-        <span class="contact-value">ame.co.contato@gmail.com</span>
-      </a>
-      <a class="contact-item" href="https://www.instagram.com/amecohub" target="_blank" rel="noopener">
-        <span class="contact-label">Instagram</span>
-        <span class="contact-value">@amecohub</span>
-      </a>
-      <a class="contact-item" href="https://amecohub.com.br" target="_blank" rel="noopener">
-        <span class="contact-label">Site</span>
-        <span class="contact-value">amecohub.com.br</span>
-      </a>
+    <div class="hub-divider" aria-hidden="true"></div>
+
+    <p class="hub-eyebrow">Hub Âme &amp; Co</p>
+    <div class="hub-grid">
+      <div class="hub-card">
+        <img src="assets/hub/universo-luz.png" alt="Espaço Universo Lu(z)">
+      </div>
+      <div class="hub-card">
+        <img src="assets/hub/victoria-antunes.png" alt="Victoria Antunes assessoria e eventos">
+      </div>
+      <div class="hub-card">
+        <img src="assets/hub/please-post-me.png" alt="Please Post Me agência">
+      </div>
+      <div class="hub-card">
+        <img src="assets/hub/solie-experience.png" alt="Soliê experience">
+      </div>
     </div>
   </div>
 </section>

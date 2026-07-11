@@ -40,40 +40,170 @@
   });
 
   /* ============================================================
-     Hero video: scroll-triggered scrubbing (plays as the user
-     scrolls through the pinned hero, instead of autoplaying)
+     Fade carousels (Sobre / Depoimentos) — cross-fade autoplay
      ============================================================ */
-  var heroVideo = document.getElementById('heroVideo');
-  var heroScroll = document.getElementById('topo');
+  var fadeCarousels = document.querySelectorAll('.fade-carousel');
+  fadeCarousels.forEach(function (carousel) {
+    var slides = Array.prototype.slice.call(carousel.querySelectorAll('img'));
+    if (slides.length < 2) return;
 
-  if (heroVideo && heroScroll) {
-    var heroReady = false;
+    var delay = parseInt(carousel.getAttribute('data-autoplay-delay'), 10) || 5000;
+    var current = slides.findIndex(function (img) { return img.classList.contains('is-active'); });
+    if (current < 0) {
+      current = 0;
+      slides[0].classList.add('is-active');
+    }
 
-    var primeVideo = function () {
-      if (heroReady) return;
-      heroReady = true;
-      heroVideo.pause();
-    };
-    heroVideo.addEventListener('loadedmetadata', primeVideo);
-    // Some mobile browsers only report a usable duration after a play() call.
-    var kickoff = heroVideo.play();
-    if (kickoff && kickoff.then) { kickoff.then(primeVideo).catch(primeVideo); }
+    var timer = null;
 
-    var updateHeroScrub = function () {
-      if (!heroVideo.duration) return;
-      var rect = heroScroll.getBoundingClientRect();
-      var total = heroScroll.offsetHeight - window.innerHeight;
-      var progress = total > 0 ? (-rect.top) / total : 0;
-      progress = Math.min(Math.max(progress, 0), 1);
-      var targetTime = progress * heroVideo.duration;
-      if (Math.abs(heroVideo.currentTime - targetTime) > 0.03) {
-        heroVideo.currentTime = targetTime;
+    function goTo(index) {
+      slides[current].classList.remove('is-active');
+      current = (index + slides.length) % slides.length;
+      slides[current].classList.add('is-active');
+    }
+
+    function start() {
+      timer = setInterval(function () { goTo(current + 1); }, delay);
+    }
+    function stop() {
+      if (timer) { clearInterval(timer); timer = null; }
+    }
+
+    start();
+    carousel.addEventListener('mouseenter', stop);
+    carousel.addEventListener('mouseleave', start);
+  });
+
+  /* ============================================================
+     Experience carousel — drag/swipe, autoplay, loop, indicators
+     ============================================================ */
+  var expCarousel = document.getElementById('expCarousel');
+  if (expCarousel) {
+    var expTrack = document.getElementById('expCarouselTrack');
+    var expCards = Array.prototype.slice.call(expTrack.children);
+    var expPrev = document.getElementById('expPrev');
+    var expNext = document.getElementById('expNext');
+    var expIndicatorsEl = document.getElementById('expIndicators');
+    var expDelay = parseInt(expCarousel.getAttribute('data-autoplay-delay'), 10) || 3500;
+    var expActive = 0;
+    var expTimer = null;
+
+    expCards.forEach(function (card, i) {
+      var dot = document.createElement('li');
+      dot.className = 'exp-carousel-indicator';
+      dot.setAttribute('role', 'button');
+      dot.setAttribute('tabindex', '0');
+      dot.setAttribute('aria-label', 'Ir para item ' + (i + 1));
+      dot.addEventListener('click', function () {
+        setActive(i);
+        restartAutoplay();
+      });
+      expIndicatorsEl.appendChild(dot);
+    });
+    var expDots = Array.prototype.slice.call(expIndicatorsEl.children);
+
+    function updateOffsets() {
+      var total = expCards.length;
+      expCards.forEach(function (card, i) {
+        var diff = i - expActive;
+        if (diff > total / 2) { diff -= total; }
+        if (diff < -total / 2) { diff += total; }
+        card.style.setProperty('--offset', diff);
+        card.style.setProperty('--abs-offset', Math.abs(diff));
+        card.classList.toggle('is-active', i === expActive);
+      });
+      expDots.forEach(function (dot, i) {
+        dot.classList.toggle('is-active', i === expActive);
+      });
+      centerTrack(0);
+    }
+
+    function trackBaseOffset() {
+      var viewport = expTrack.parentElement;
+      var cardWidth = expCards[0].offsetWidth;
+      var gapStr = getComputedStyle(expTrack).columnGap || getComputedStyle(expTrack).gap || '28px';
+      var gap = parseFloat(gapStr) || 28;
+      var cardCenter = expActive * (cardWidth + gap) + cardWidth / 2;
+      var viewportCenter = viewport.clientWidth / 2;
+      return viewportCenter - cardCenter;
+    }
+
+    function centerTrack(extra) {
+      var translateX = trackBaseOffset() + (extra || 0);
+      expTrack.style.transform = 'translateX(' + translateX + 'px)';
+    }
+
+    function setActive(index) {
+      var total = expCards.length;
+      expActive = (index + total) % total;
+      updateOffsets();
+    }
+
+    window.addEventListener('resize', function () { centerTrack(0); });
+
+    function restartAutoplay() {
+      if (expTimer) { clearInterval(expTimer); }
+      expTimer = setInterval(function () { setActive(expActive + 1); }, expDelay);
+    }
+    function stopAutoplay() {
+      if (expTimer) { clearInterval(expTimer); expTimer = null; }
+    }
+
+    expPrev.addEventListener('click', function () { setActive(expActive - 1); restartAutoplay(); });
+    expNext.addEventListener('click', function () { setActive(expActive + 1); restartAutoplay(); });
+
+    expCarousel.addEventListener('mouseenter', stopAutoplay);
+    expCarousel.addEventListener('mouseleave', restartAutoplay);
+
+    var isDragging = false;
+    var dragStartX = 0;
+    var dragDelta = 0;
+
+    function onPointerDown(e) {
+      isDragging = true;
+      dragStartX = e.clientX;
+      dragDelta = 0;
+      expTrack.classList.add('is-dragging');
+      stopAutoplay();
+    }
+    function onPointerMove(e) {
+      if (!isDragging) { return; }
+      dragDelta = e.clientX - dragStartX;
+      centerTrack(dragDelta);
+    }
+    function onPointerUp() {
+      if (!isDragging) { return; }
+      isDragging = false;
+      expTrack.classList.remove('is-dragging');
+      var threshold = 40;
+      if (dragDelta > threshold) {
+        setActive(expActive - 1);
+      } else if (dragDelta < -threshold) {
+        setActive(expActive + 1);
+      } else {
+        centerTrack(0);
       }
-    };
+      dragDelta = 0;
+      restartAutoplay();
+    }
 
-    window.addEventListener('scroll', updateHeroScrub, { passive: true });
-    window.addEventListener('resize', updateHeroScrub);
-    updateHeroScrub();
+    expTrack.addEventListener('pointerdown', onPointerDown);
+    window.addEventListener('pointermove', onPointerMove);
+    window.addEventListener('pointerup', onPointerUp);
+
+    expTrack.addEventListener('click', function (e) {
+      if (Math.abs(dragDelta) > 5) { return; }
+      var card = e.target.closest ? e.target.closest('.feature-card') : null;
+      if (!card) { return; }
+      var idx = expCards.indexOf(card);
+      if (idx !== -1 && idx !== expActive) {
+        setActive(idx);
+        restartAutoplay();
+      }
+    });
+
+    setActive(0);
+    restartAutoplay();
   }
 
   /* ============================================================
@@ -190,13 +320,8 @@
   }
 
   /* ============================================================
-     Contact section WhatsApp link
+     Floating WhatsApp button
      ============================================================ */
-  var contactWhatsapp = document.getElementById('contactWhatsapp');
-  if (contactWhatsapp) {
-    contactWhatsapp.href = 'https://wa.me/' + CONFIG.whatsappNumber;
-  }
-
   var whatsappFloat = document.getElementById('whatsappFloat');
   if (whatsappFloat) {
     whatsappFloat.href = 'https://wa.me/' + CONFIG.whatsappNumber;
