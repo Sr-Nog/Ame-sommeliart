@@ -278,26 +278,6 @@ a { color: inherit; text-decoration: none; }
   backdrop-filter: blur(4px);
 }
 
-.scroll-cue {
-  position: absolute;
-  bottom: 32px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 1;
-}
-.scroll-cue span {
-  display: block;
-  width: 1px;
-  height: 48px;
-  background: var(--pink);
-  animation: scrollcue 2s ease-in-out infinite;
-}
-@keyframes scrollcue {
-  0% { transform: scaleY(0.2); opacity: 0.3; transform-origin: top; }
-  50% { transform: scaleY(1); opacity: 1; transform-origin: top; }
-  100% { transform: scaleY(0.2); opacity: 0.3; transform-origin: bottom; }
-}
-
 /* ==========================================================================
    Sections
    ========================================================================== */
@@ -836,8 +816,8 @@ a { color: inherit; text-decoration: none; }
   max-width: 880px;
   margin: 0 auto;
 }
-.hub-grid .hub-card { padding: 28px 18px; height: 130px; }
-.hub-grid .hub-card img { max-height: 54px; filter: brightness(0) invert(1); opacity: 0.92; }
+.hub-grid .hub-card { padding: 20px 18px; height: 140px; }
+.hub-grid .hub-card img { max-height: 82px; max-width: 150px; filter: brightness(0) invert(1); opacity: 0.92; }
 
 /* ==========================================================================
    Footer
